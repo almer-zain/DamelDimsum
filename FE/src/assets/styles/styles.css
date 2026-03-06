@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+
+:root {
+  /* --- The Fix --- */
+  --dimsum-red: #B91C1C;      /* A slightly richer, modern red */
+  --dimsum-gold: #FBBF24;     /* A brighter, more energetic gold */
+  --dimsum-cream: #F3F4F6;    /* A very light, neutral gray-cream */
+  --dimsum-charcoal: #111827; /* A deep, rich off-black */
+  --dimsum-wood: #2C1E16;     /* Kept for reference, but we will use charcoal more */
+
+  --oriental-red: #8B0000;
+  --oriental-gold: #D4AF37;
+  --dark-wood: #111827;
+}
+
+body {
+  background-color: var(--dimsum-cream);
+  color: var(--dimsum-charcoal);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+/* --- The Fix --- */
+/* A subtle, dark pattern that suggests texture, not screams it */
+
+.bg-subtle-wood {
+  background-image: linear-gradient(rgba(41, 4, 4, 0.4), rgba(17, 24, 39, 0.4)),
+                    url("../images/Wooden.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: var(--dimsum-charcoal);
+}
+
+.bg-subtle-wood2 {
+  background-image: 
+                    url("../images/Wooden.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: var(--dimsum-cream);
+}
+
+
+/* Custom Scrollbar (Oriental Style) */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dimsum-cream); }
+::-webkit-scrollbar-thumb { background: var(--dimsum-red); border-radius: 10px; }
+
+/* REFINED PAPER BACKGROUND */
+.bg-parchment {
+  background-color: var(--paper-cream);
+  background-image: url("https://www.transparenttextures.com/patterns/handmade-paper.png");
+  background-attachment: fixed;
+}
+
+/* SUBTLE GRAIN OVERLAY */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image: url("https://www.transparenttextures.com/patterns/cream-pixels.png");
+}
+
+/* TRADITIONAL CLOUD PATTERN (Xiangyun) */
+.bg-xiangyun {
+  background-image: url("https://www.transparenttextures.com/patterns/stucco.png"); /* Using stucco as a high-end paper base */
+  background-color: var(--dark-wood);
+}
+
+/* CHINESE LATTICE BORDER */
+.lattice-border {
+  background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png"); /* A subtle geometric weave */
+  scale: 1;
+  opacity: 0.8;
+}
