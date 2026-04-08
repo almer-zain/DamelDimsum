@@ -15,21 +15,30 @@ exports.updateSettings = async (req, res, next) => {
     res.status(200).json(new ApiResponse(200, data, 'Pengaturan disimpan'));
   } catch (e) { next(e); }
 };
-
-
 exports.uploadIcon = async (req, res, next) => {
   try {
-    if (!req.files || !req.files.images) return res.status(400).json({ message: "Pilih file terlebih dahulu" });
+    console.log("FILES ARRIVED:", req.files);
+    console.log("BODY ARRIVED:", req.body);
 
-    // 1. Upload the physical file
-    const file = Array.isArray(req.files.images) ? req.files.images[0] : req.files.images;
-    const fileName = await uploadFile(file);
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ message: "File tidak terbaca oleh server" });
+    }
 
-    // 2. SAVE TO SETTINGS TABLE (Not product table)
-    // The key is passed from frontend (e.g., 'site_logo' or 'favicon')
-    const settingKey = req.body.key || 'site_logo';
-    await settingsService.updateSetting(settingKey, fileName);
+    const file = req.files.images || req.files.file;
+    if (!file) return res.status(400).json({ message: "Field 'images' kosong" });
+
+    const fileName = await uploadFile(Array.isArray(file) ? file[0] : file);
+
+    const settingKey = req.body.key;
+    if (!settingKey) return res.status(400).json({ message: "Setting key tidak ditemukan" });
+
+    // Pass as object for upsert
+    const dbResult = await settingsService.updateSettings({ [settingKey]: fileName });
+    console.log("DB update result:", dbResult);
 
     res.status(200).json(new ApiResponse(200, fileName, "Ikon berhasil diperbarui"));
-  } catch (e) { next(e); }
+  } catch (e) {
+    console.error("Upload Controller Error:", e);
+    next(e);
+  }
 };

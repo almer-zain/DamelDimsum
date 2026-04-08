@@ -1,18 +1,47 @@
-import axios from 'axios';
+import axios from "axios";
 
-// 1. Create the instance
+/*
+|--------------------------------------------------------------------------
+| Resolve API URL
+|--------------------------------------------------------------------------
+|
+| VITE_API_URL examples:
+| Local dev:
+|   http://localhost:3000/api
+|
+| Ngrok:
+|   https://randolph-jawbreaking-myung.ngrok-free.dev/api
+|
+*/
+
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1")
+  .replace(/\/$/, "");
+
+/*
+|--------------------------------------------------------------------------
+| Axios Instance
+|--------------------------------------------------------------------------
+*/
+
 const api = axios.create({
-  // Clean up the URL to prevent double slashes
-  baseURL: import.meta.env.VITE_API_URL.replace(/\/$/, '') + '/v1',
-  
-  // 2. MANDATORY: This is what allows the browser to send/receive 
-  // HttpOnly cookies across different ports (5173 to 3000)
-  withCredentials: true 
+  baseURL: `${API_URL}/v1`,
+ withCredentials: true,
+  headers: {
+    // Prevent ngrok browser warning page
+    "ngrok-skip-browser-warning": "true"
+  }
 });
 
-// 3. The REQUEST Interceptor 
-// You NO LONGER need to manually attach the token from localStorage.
-// The browser handles the cookie "wristband" for you automatically.
+/*
+|--------------------------------------------------------------------------
+| Request Interceptor
+|--------------------------------------------------------------------------
+|
+| You can add auth headers here if needed.
+| Cookies are automatically handled by the browser.
+|
+*/
+
 api.interceptors.request.use(
   (config) => {
     return config;
@@ -22,22 +51,34 @@ api.interceptors.request.use(
   }
 );
 
-// 4. The RESPONSE Interceptor (Handling expired sessions)
+/*
+|--------------------------------------------------------------------------
+| Response Interceptor
+|--------------------------------------------------------------------------
+|
+| Handle expired sessions automatically.
+|
+*/
+
 api.interceptors.response.use(
   (response) => response,
+
   (error) => {
-    // If backend returns 401, the cookie is either missing, expired, or tampered with.
-    if (error.response && error.response.status === 401) {
-      console.warn("Session expired or invalid. Redirecting to login...");
-      
-      // Clean up local data
-      localStorage.removeItem('admin');
-      
-      // Only redirect if we are not already on the login page
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
+    if (error.response) {
+
+      if (error.response.status === 401) {
+
+        console.warn("Session expired or invalid. Redirecting to login...");
+
+        localStorage.removeItem("admin");
+
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
+        }
       }
+
     }
+
     return Promise.reject(error);
   }
 );

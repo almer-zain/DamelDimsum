@@ -3,19 +3,20 @@ const { Op } = require('sequelize');
 const { ApiError } = require('../../../utils/ApiError');
 
 exports.apply = async (data) => {
-  // 1. Check for duplicate WhatsApp
-  const existingWA = await Reseller.findOne({ where: { whatsapp: data.whatsapp } });
-  if (existingWA) {
-    throw new ApiError(400, 'Nomor WhatsApp ini sudah terdaftar sebagai mitra.');
+  // --- THE FIX: SANITIZATION ---
+  // Remove all non-digit characters (removes +, spaces, dashes)
+  data.whatsapp = data.whatsapp.replace(/\D/g, '');
+  
+  // Optional: Convert 08... to 628...
+  if (data.whatsapp.startsWith('0')) {
+    data.whatsapp = '62' + data.whatsapp.slice(1);
   }
 
-  // 2. Check for duplicate Shop Name
-  const existingShop = await Reseller.findOne({ where: { nameShop: data.nameShop } });
-  if (existingShop && data.nameShop !== '') {
-    throw new ApiError(400, 'Nama toko ini sudah digunakan mitra lain.');
-  }
+  // Check for duplicate after cleaning
+  const existing = await Reseller.findOne({ where: { whatsapp: data.whatsapp } });
+  if (existing) throw new ApiError(400, 'Nomor WA ini sudah terdaftar.');
 
-  return await Reseller.create({ ...data, status: 'pending' });
+  return await Reseller.create({ ...data, status: data.status || 'pending' });
 };
 
 exports.search = async (city) => {
@@ -45,3 +46,36 @@ exports.delete = async (id) => {
 };
 
 
+
+
+
+
+//  Get single reseller
+exports.getById = async (id) => {
+  const reseller = await Reseller.findByPk(id);
+  if (!reseller) throw new ApiError(404, 'Reseller not found');
+  return reseller;
+};
+
+// Update reseller (name, whatsapp, city, etc)
+exports.update = async (id, data) => {
+  const reseller = await Reseller.findByPk(id);
+  if (!reseller) throw new ApiError(404, 'Reseller not found');
+
+  // If the admin is updating the WhatsApp number, sanitize and check duplicate
+  if (data.whatsapp) {
+    data.whatsapp = data.whatsapp.replace(/\D/g, '');
+    if (data.whatsapp.startsWith('0')) {
+      data.whatsapp = '62' + data.whatsapp.slice(1);
+    }
+    
+    // Check if the NEW number belongs to someone else
+    if (data.whatsapp !== reseller.whatsapp) {
+      const existing = await Reseller.findOne({ where: { whatsapp: data.whatsapp } });
+      if (existing) throw new ApiError(400, 'Nomor WA ini sudah terdaftar.');
+    }
+  }
+
+  // Update with whatever data was passed in
+  return await reseller.update(data);
+};

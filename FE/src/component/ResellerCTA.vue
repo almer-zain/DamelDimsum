@@ -84,10 +84,10 @@ onMounted(() => {
 
         <!-- Trust Badges -->
         <div class="cta-text-reveal flex flex-wrap justify-center lg:justify-start gap-6 pt-4">
-          <div class="flex items-center gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
+          <div class="flex items-center text-sm gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
             <CheckCircle :size="14" class="text-[#FBBF24]" /> Produk Siap Jual
           </div>
-          <div class="flex items-center gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
+          <div class="flex items-center text-sm gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
             <CheckCircle :size="14" class="text-[#FBBF24]" /> Margin Keuntungan Tinggi
           </div>
         </div>
@@ -95,7 +95,7 @@ onMounted(() => {
         <div class="cta-text-reveal pt-6">
           <router-link 
             to="/register-reseller" 
-            class="bg-[#FBBF24] text-[#111827] px-12 py-6 rounded-full font-black text-xs uppercase tracking-[0.3em] shadow-[0_20px_40px_rgba(251,191,36,0.3)] hover:bg-white transition-all inline-flex items-center gap-4 active:scale-95"
+            class="bg-[#FBBF24] text-[#111827] px-12 py-6 rounded-full font-black text-sm uppercase tracking-[0.3em] shadow-[0_20px_40px_rgba(251,191,36,0.3)] hover:bg-white transition-all inline-flex items-center gap-4 active:scale-95"
           >
             Daftar Sekarang <ArrowRight :size="20" />
           </router-link>
@@ -108,7 +108,7 @@ onMounted(() => {
         <!-- THE GLASS CARD -->
         <div 
           ref="floatCard"
-          class="relative w-full max-w-[450px] bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-[3rem] border border-white/20 p-10 lg:p-14 shadow-3xl transform-style-3d cursor-default"
+          class="relative w-full max-w-[650px] bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-[3rem] border border-white/20 p-10 lg:p-14 shadow-3xl transform-style-3d cursor-default"
           @mousemove="handleTilt"
           @mouseleave="resetTilt"
         >
@@ -118,12 +118,12 @@ onMounted(() => {
           </div>
 
           <!-- Card Content -->
-          <div class="ml-auto w-1/2 lg:w-3/5 space-y-6 relative z-10 text-right">
-            <h4 class="text-3xl lg:text-4xl font-black text-white uppercase tracking-tighter leading-none italic">
-              Yuk Jadi <span class="text-[#FBBF24]">Reseller</span>
+          <div class="ml-auto w-1/2 space-y-6 relative z-10 text-right">
+            <h4 class="text-2xl lg:text-4xl font-black text-white uppercase tracking-tighter leading-none italic">
+              Paket Dimsum Mulai Dari <span class="text-[#FBBF24]"> <br>Rp 210.000</span>/ 100 pcs
             </h4>
-            <p class="text-xs text-white/60 font-bold leading-relaxed uppercase tracking-wider">
-              Dapatkan produk fresh setiap hari & dukungan marketing penuh dari pusat.
+            <p class="text-sm text-white/60 font-bold leading-relaxed uppercase tracking-wider">
+              Paket dimsum lengkap dengan saus gratis. Cocok untuk kebutuhan usaha anda. Yuk bergabung menjadi dimsumprenuer bersama Dàmel Dimsum!
             </p>
             
             <div class="pt-6">

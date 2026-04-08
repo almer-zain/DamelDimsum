@@ -24,6 +24,7 @@ const goToFullCart = () => {
   router.push('/cart');
 };
 
+
 // --- ANIMATIONS (Fixed for Centering) ---
 watch(() => props.isOpen, (val) => {
   if (val) {
@@ -115,12 +116,25 @@ onMounted(() => {
            <span class="text-[10px] font-black uppercase text-gray-400 tracking-[0.2em]">Estimasi Total</span>
            <span class="text-2xl font-black text-[#111827]">{{ formatCurrency(cartTotal) }}</span>
         </div>
-        <button 
-          @click="$emit('checkout')"
-          class="w-full py-5 bg-[#25D366] hover:bg-[#111827] text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-green-900/20 active:scale-95 transition-all flex items-center justify-center gap-3"
-        >
-          Konfirmasi via WhatsApp <ArrowRight :size="18" />
-        </button>
+
+        <!-- BUTTON GROUP -->
+        <div class="space-y-3">
+          <!-- Primary Action -->
+          <button 
+            @click="$emit('checkout')"
+            class="w-full py-5 bg-[#25D366] hover:bg-[#111827] text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-green-900/10 active:scale-95 transition-all flex items-center justify-center gap-3"
+          >
+            Konfirmasi via WhatsApp <ArrowRight :size="18" />
+          </button>
+
+          <!-- Secondary Action: Other Payment -->
+          <button 
+            @click="router.push('/cart')"
+            class="w-full py-4 bg-gray-50 text-gray-400 hover:text-[#111827] hover:bg-gray-100 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all active:scale-95"
+          >
+            Metode Pembayaran Lain
+          </button>
+        </div>
       </div>
     </div>
   </teleport>

@@ -93,6 +93,8 @@ onMounted(() => {
 <template>
   <div class="space-y-8">
     
+
+
     <!-- ERROR BANNER -->
     <div v-if="hasError" class="error-banner bg-red-50 border-2 border-red-200 p-4 rounded-2xl flex items-center gap-4 text-red-700">
       <WifiOff :size="24" />

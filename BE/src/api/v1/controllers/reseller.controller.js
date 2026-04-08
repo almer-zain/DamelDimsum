@@ -28,3 +28,25 @@ exports.verify = async (req, res, next) => {
     res.status(200).json(new ApiResponse(200, data, `Reseller ${req.body.status}`));
   } catch (e) { next(e); }
 };
+
+
+exports.getById = async (req, res, next) => {
+  try {
+    const data = await resellerService.getById(req.params.id);
+    res.status(200).json(new ApiResponse(200, data));
+  } catch (e) { next(e); }
+};
+
+exports.update = async (req, res, next) => {
+  try {
+    const data = await resellerService.update(req.params.id, req.body);
+    res.status(200).json(new ApiResponse(200, data, 'Reseller updated successfully'));
+  } catch (e) { next(e); }
+};
+
+exports.delete = async (req, res, next) => {
+  try {
+    await resellerService.delete(req.params.id);
+    res.status(200).json(new ApiResponse(200, null, 'Reseller deleted successfully'));
+  } catch (e) { next(e); }
+};

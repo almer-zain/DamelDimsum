@@ -8,10 +8,10 @@ exports.login = async (req, res, next) => {
 
     // Set token as HttpOnly Cookie
     res.cookie('token', token, {
-      httpOnly: true,     // Protects against XSS
-      secure: false,      // Set to true in production (HTTPS)
-      sameSite: 'lax',    // Standard security
-      maxAge: 24 * 60 * 60 * 1000 // 1 day
+      httpOnly: true,
+      secure: true,      // allow HTTP for local dev
+      sameSite: 'none',    
+      maxAge: 24 * 60 * 60 * 1000
     });
 
     res.status(200).json(new ApiResponse(200, { admin }, 'Login Berhasil'));
@@ -58,8 +58,8 @@ exports.logout = async (req, res, next) => {
     // Clear the HttpOnly cookie
     res.clearCookie('token', {
       httpOnly: true,
-      secure: false, // Set to true in production
-      sameSite: 'lax'
+      secure: true, // Set to true in production
+      sameSite: 'none'
     });
 
     res.status(200).json(new ApiResponse(200, null, 'Berhasil keluar sistem'));

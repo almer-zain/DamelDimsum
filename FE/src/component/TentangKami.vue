@@ -155,7 +155,7 @@ onUnmounted(() => {
             <span class="lg:text-white/40 text-[#111827]/40 font-black uppercase tracking-[0.6em] text-[10px] block">Scale</span>
             <h2 class="text-dynamic text-6xl lg:text-9xl font-black tracking-tighter uppercase italic leading-[0.75]">Gabung <span class="text-[#FBBF24] max-lg:text-[#8B0000] not-italic">Bersama</span></h2>
             <p class="text-dynamic text-lg lg:text-xl lg:text-white/60 text-[#111827]/60 font-medium italic leading-relaxed lg:max-w-sm">"Jadi bagian dari reseller Damel Dimsum dan tumbuh bersama menghadirkan dimsum berkualitas"</p>
-            <router-link to="/find-reseller" class="inline-flex items-center gap-6 bg-[#111827] lg:bg-white text-white lg:text-[#8B0000] px-16 py-7 rounded-full font-black text-md uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all">
+            <router-link to="/register-reseller" class="inline-flex items-center gap-6 bg-[#111827] lg:bg-white text-white lg:text-[#8B0000] px-16 py-7 rounded-full font-black text-md uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all">
               Daftar Reseller <Star :size="18" fill="currentColor" />
             </router-link>
           </div>

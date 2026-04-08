@@ -94,19 +94,32 @@ const handleIconUpload = async (event, keyName) => {
   const file = event.target.files[0];
   if (!file) return;
 
+  // 1. Validation: Max 2MB
+  if (file.size > 2 * 1024 * 1024) {
+    return showToast("File terlalu besar! Maksimal 2MB", "error");
+  }
+
   const formData = new FormData();
-  formData.append('images', file); 
-  formData.append('key', keyName); // Tell backend which key to update (siteLogo or siteFavicon)
+  formData.append('images', file); // Must match backend req.files.images
+  formData.append('key', keyName);   // Must match backend req.body.key
 
   try {
-    const res = await api.post('/settings/upload-icon', formData);
+    // 2. Explicitly set headers for this POST call
+    const res = await api.post('/settings/upload-icon', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    
     const newFileName = res.data.data;
     settings.value[keyName] = newFileName;
+    
     showToast(`Berhasil memperbarui ${keyName}!`);
     isLogoModalOpen.value = false;
     isFaviconModalOpen.value = false;
   } catch (e) {
-    showToast('Gagal mengunggah gambar.', 'error');
+    console.error("Upload Error:", e.response?.data || e.message);
+    showToast(e.response?.data?.message || 'Gagal mengunggah gambar.', 'error');
   }
 };
 

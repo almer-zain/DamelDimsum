@@ -15,7 +15,7 @@ const testimonials = [
     name: 'Siti Aminah', 
     role: 'Reseller Bekasi', 
     initial: 'S',
-    quote: 'Dimsum Damel benar-benar juara. Pelanggan saya selalu repeat order karena kualitas dagingnya yang premium dan ukuran yang pas. Sangat membantu ekonomi keluarga kami.' 
+    quote: 'Enak bgt bu, dimsum nya mantap gede dan real pic 😁👍🏻 kt anak ku enakk pol 👍🏻 tebel dan full daging bu...next time pst beli lg bu 🫰🏻.' 
   },
   { 
     name: 'Budi Santoso', 

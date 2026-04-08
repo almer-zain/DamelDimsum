@@ -5,6 +5,7 @@ const authRoutes = require('./auth.routes');
 const categoryRoutes = require('./category.routes');
 const productRoutes = require('./product.routes');
 const resellerRoutes = require('./reseller.routes');
+const orderRoutes = require('./order.routes');
 const settingsController = require('../controllers/settings.controller');
 const auth = require('../middlewares/auth.middleware');
 
@@ -12,6 +13,7 @@ router.use('/auth', authRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/products', productRoutes);
 router.use('/resellers', resellerRoutes);
+router.use('/orders', orderRoutes);
 
 module.exports = router;
 

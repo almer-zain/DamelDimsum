@@ -3,9 +3,15 @@ const { ApiResponse } = require('../../../utils/ApiResponse');
 
 exports.create = async (req, res, next) => {
   try {
+    console.log("--- DEBUG CREATE ---");
+    console.log("BODY:", req.body);
+    console.log("FILES:", req.files); // <--- ADD THIS LINE!
+    
     const data = await productService.create(req.body, req.files);
-    res.status(201).json(new ApiResponse(201, data, 'Product created'));
-  } catch (e) { next(e); }
+    res.status(201).json(new ApiResponse(201, data, 'Produk berhasil dibuat'));
+  } catch (e) {
+    next(e);
+  }
 };
 
 exports.getAll = async (req, res, next) => {

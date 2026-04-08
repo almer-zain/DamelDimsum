@@ -11,18 +11,21 @@ const createProduct = {
   body: Joi.object().keys({
     name: Joi.string().required(),
     categoryId: Joi.number().required(),
-    description: Joi.string().allow(''),
-    price: Joi.number().required(),
-    resellerPrice: Joi.number().optional(),
+    description: Joi.string().allow('').optional(),
+    // .coerce() or simply just letting Joi handle string-to-number conversion:
+
+    existingImages: Joi.string().optional(),
+    price: Joi.number().required(), 
+    resellerPrice: Joi.number().required(),
     status: Joi.string().valid('active', 'inactive').default('active')
-  }),
+  })
 };
 
 const resellerApply = {
   body: Joi.object().keys({
     nameOwner: Joi.string().required(),
     nameShop: Joi.string().required(),
-    whatsapp: Joi.string().required().pattern(/^[0-9]+$/).message("Nomor WA harus angka"),
+    whatsapp: Joi.string().required().pattern(/^\+?[0-9]+$/).message("Format nomor WA tidak valid"),
     city: Joi.string().required(),
     address: Joi.string().required()
   }),

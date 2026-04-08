@@ -31,7 +31,7 @@ const facebookUrl = computed(() => {
 
 
 const formattedPhone = computed(() => {
-  return settings.mainWhatsapp ? `+${settings.mainWhatsapp}` : '+62 857 4785 5881';
+  return settings.mainWhatsapp ? `+${settings.mainWhatsapp}` : 'N/A';
 });
 
 onMounted(() => {
@@ -67,7 +67,6 @@ onMounted(() => {
             </div>
             <div>
               <h4 class="text-white font-black tracking-[0.3em] uppercase leading-none italic">{{ settings.siteName || 'DÀMEL' }}</h4>
-              <p class="text-[#D4AF37] font-bold tracking-[0.2em] text-[8px] uppercase mt-1">Dimsum House</p>
             </div>
           </div>
           <p class="text-gray-400 text-xs font-medium leading-relaxed max-w-[250px]">
@@ -99,14 +98,14 @@ onMounted(() => {
               <div class="mt-1 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#D4AF37]"><Phone :size="14" /></div>
               <div>
                 <p class="text-[9px] font-black uppercase text-gray-500 tracking-widest mb-1">WhatsApp</p>
-                <p class="text-white font-bold text-xs">{{ formattedPhone }}</p>
+                <p class="text-white font-bold text-md">{{ formattedPhone }}</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
               <div class="mt-1 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#D4AF37]"><Mail :size="14" /></div>
               <div>
-                <p class="text-[9px] font-black uppercase text-gray-500 tracking-widest mb-1">Email Bisnis</p>
-                <p class="text-white font-bold text-xs">{{ settings.email || 'halo@dameldimsum.com' }}</p>
+                <p class="text-[10px] font-black uppercase text-gray-500 tracking-widest mb-1">Email Bisnis</p>
+                <p class="text-white font-bold text-sm">{{ settings.email || 'halo@dameldimsum.com' }}</p>
               </div>
             </div>
           </div>
@@ -120,7 +119,7 @@ onMounted(() => {
             <div>
               <p class="text-[9px] font-black uppercase text-gray-500 tracking-widest mb-1">Kantor Utama</p>
               <!-- DYNAMIC ADDRESS -->
-              <p class="text-white font-bold text-xs leading-relaxed max-w-[200px]">
+              <p class="text-white font-bold text-sm leading-relaxed max-w-[200px]">
                 {{ settings.address || 'Purwokerto, Jawa Tengah, Indonesia' }}
               </p>
             </div>

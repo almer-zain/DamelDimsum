@@ -18,7 +18,6 @@ const dynamicLogo = computed(() => {
   if (!settings.siteLogo) return null;
   return `${import.meta.env.VITE_IMAGE_URL}/${settings.siteLogo}`;
 });
-
 const formattedPhone = computed(() => {
   return settings.mainWhatsapp ? `+${settings.mainWhatsapp}` : '+62 123 4568 9000';
 });
@@ -87,7 +86,7 @@ const navLinks = [
   { name: 'Tentang Kami', path: '#about' }, // Fixed: was home#about
   { name: 'Keunggulan', path: '#features' }, // Fixed: was home#features
   { name: 'Produk', path: '/menu' }, 
-  { name: 'Reseller', path: '#reseller' }, // Fixed: was home#reseller
+  { name: 'Reseller', path: '/find-reseller' }, // Fixed: was home#reseller
 ];
 const handleNavClick = async (path) => {
   isMobileMenuOpen.value = false;
