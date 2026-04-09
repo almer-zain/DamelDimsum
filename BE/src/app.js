@@ -17,6 +17,8 @@ const app = express();
 // ---------------------
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:3000',
+  'https://localhost:3000',
   'https://localhost:5173',
   'http://127.0.0.1:5173',
   'https://dameldimsum.my.id', // ADDED YOUR PRODUCTION DOMAIN
@@ -87,7 +89,7 @@ app.use('/api/v1', v1Routes);
 // 6. SERVE VUE FRONTEND
 // ---------------------
 // FIXED PATH: Since this file is in 'src/', we only go up ONE level to reach 'FE'
-const frontendDistPath = path.join(__dirname, '../FE/dist'); 
+const frontendDistPath = path.join(__dirname, '../../FE/dist'); 
 app.use(express.static(frontendDistPath));
 
 // ---------------------
